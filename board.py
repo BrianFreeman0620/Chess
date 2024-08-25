@@ -1,5 +1,5 @@
 import graphics
-from piece import Pawn, Piece, Rook
+from piece import Bishop, King, Knight, Pawn, Piece, Queen, Rook
 
 class Board:
     def __init__(self):
@@ -13,27 +13,43 @@ class Board:
         # Pawns
         for row in self.pieceDict:
             self.pieceDict[row][1] = Pawn(graphics.Point(row, 1))
-            self.pieceDict[row][1].setColor("white")
             self.pieceDict[row][6] = Pawn(graphics.Point(row, 6))
-            self.pieceDict[row][6].setColor("black")
-            self.pieceDict[row][1].setImages()
-            self.pieceDict[row][6].setImages()
+        
+        # Bishops
+        self.pieceDict[2][0] = Bishop(graphics.Point(2,0))
+        self.pieceDict[5][0] = Bishop(graphics.Point(5,0))
+        self.pieceDict[2][7] = Bishop(graphics.Point(2,7))
+        self.pieceDict[5][7] = Bishop(graphics.Point(5,7))
+        
+        # Kings
+        self.pieceDict[4][0] = King(graphics.Point(4,0))
+        self.pieceDict[4][7] = King(graphics.Point(4,7))
+        
+        # Knights
+        self.pieceDict[1][0] = Knight(graphics.Point(1,0))
+        self.pieceDict[6][0] = Knight(graphics.Point(6,0))
+        self.pieceDict[1][7] = Knight(graphics.Point(1,7))
+        self.pieceDict[6][7] = Knight(graphics.Point(6,7))
+        
+        # Queens
+        self.pieceDict[3][0] = Queen(graphics.Point(3,0))
+        self.pieceDict[3][7] = Queen(graphics.Point(3,7))
         
         # Rooks
         self.pieceDict[0][0] = Rook(graphics.Point(0,0))
-        self.pieceDict[0][0].setColor("white")
         self.pieceDict[7][0] = Rook(graphics.Point(7,0))
-        self.pieceDict[7][0].setColor("white")
         self.pieceDict[0][7] = Rook(graphics.Point(0,7))
-        self.pieceDict[0][7].setColor("black")
         self.pieceDict[7][7] = Rook(graphics.Point(7,7))
-        self.pieceDict[7][7].setColor("black")
-        self.pieceDict[0][0].setImages()
-        self.pieceDict[7][0].setImages()
-        self.pieceDict[0][7].setImages()
-        self.pieceDict[7][7].setImages()
         
-        print(self.pieceDict)
+        for piece in range(8):
+            self.pieceDict[piece][0].setColor("white")
+            self.pieceDict[piece][1].setColor("white")
+            self.pieceDict[piece][6].setColor("black")
+            self.pieceDict[piece][7].setColor("black")
+            self.pieceDict[piece][0].setImages()
+            self.pieceDict[piece][1].setImages()
+            self.pieceDict[piece][6].setImages()
+            self.pieceDict[piece][7].setImages()
                 
     def imageBoard(self):
         self.win = graphics.GraphWin("Chess Board", 360, 360)
