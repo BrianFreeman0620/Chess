@@ -57,10 +57,28 @@ class Board:
         self.image.draw(self.win)
         for row in self.pieceDict:
             for column in range(8):
-                if not self.pieceDict[row][column].color == None:
+                if self.pieceDict[row][column].color != None:
                     if (row + column) % 2 == 1:
                         self.pieceDict[row][column].images[0].draw(self.win)
                     else:
                         self.pieceDict[row][column].images[1].draw(self.win)
         self.win.getMouse()
         self.win.close()
+        
+    def fixPossibleMoves(self):
+        for row in range(0, 8):
+            for column in range(0, 8):
+                currentPiece = self.pieceDict[row][column]
+                currentPiece.possibleMoves()
+                if currentPiece.type != None and currentPiece.type != "knight":
+                    newMoves = []
+                    maxDistance = {}
+                    for possibleMove in currentPiece.moves:
+                        if currentPiece.color != self.pieceDict[int(currentPiece.moves[possibleMove][0].getX())][int(currentPiece.moves[possibleMove][0].getY())].color:
+                            if not currentPiece.moves[possibleMove][1] in maxDistance or currentPiece.type == "king":
+                                newMoves.append(currentPiece.moves[possibleMove])
+                        else:
+                            maxDistance[currentPiece.moves[possibleMove][1]] = currentPiece.moves[possibleMove][2]
+                    currentPiece.moves = newMoves
+                if currentPiece.type != None:
+                    print(currentPiece.type + str(currentPiece.moves) + "\n")
