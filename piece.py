@@ -3,6 +3,12 @@ import graphics
 class Piece:
     def __init__(self, startingPos):
         self.color = None
+        self.topRight = graphics.Point(startingPos.getX() + .5, startingPos.getY() + .5)
+        self.bottomLeft = graphics.Point(startingPos.getX() - .5, startingPos.getY() - .5)
+        self.images = [graphics.Rectangle(self.topRight, self.bottomLeft), graphics.Rectangle(self.topRight, self.bottomLeft), graphics.Rectangle(self.topRight, self.bottomLeft)]
+        self.images[0].setFill("white")
+        self.images[1].setFill("black")
+        self.images[2].setFill(graphics.color_rgb(0, 255, 0))
         self.position = startingPos
         self.type = None
         self.moved = False
@@ -27,9 +33,9 @@ class Bishop(Piece):
     
     def setImages(self):
         if self.color == "white":
-            self.images = [graphics.Image(self.position, "Chess_Images/WW_Bishop.png"), graphics.Image(self.position, "Chess_Images/WB_Bishop.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/WW_Bishop.png"), graphics.Image(self.position, "Chess_Images/WB_Bishop.png"), graphics.Image(self.position, "Chess_Images/WG_Bishop.png")] 
         else:
-            self.images = [graphics.Image(self.position, "Chess_Images/BW_Bishop.png"), graphics.Image(self.position, "Chess_Images/BB_Bishop.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/BW_Bishop.png"), graphics.Image(self.position, "Chess_Images/BB_Bishop.png"), graphics.Image(self.position, "Chess_Images/BG_Bishop.png")] 
 
     def possibleMoves(self):
         self.moves = {}
@@ -64,9 +70,9 @@ class King(Piece):
     
     def setImages(self):
         if self.color == "white":
-            self.images = [graphics.Image(self.position, "Chess_Images/WW_King.png"), graphics.Image(self.position, "Chess_Images/WB_King.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/WW_King.png"), graphics.Image(self.position, "Chess_Images/WB_King.png"), graphics.Image(self.position, "Chess_Images/WG_King.png")] 
         else:
-            self.images = [graphics.Image(self.position, "Chess_Images/BW_King.png"), graphics.Image(self.position, "Chess_Images/BB_King.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/BW_King.png"), graphics.Image(self.position, "Chess_Images/BB_King.png"), graphics.Image(self.position, "Chess_Images/BG_King.png")] 
     
     def possibleMoves(self):
         self.moves = {}
@@ -90,9 +96,9 @@ class Knight(Piece):
     
     def setImages(self):
         if self.color == "white":
-            self.images = [graphics.Image(self.position, "Chess_Images/WW_Knight.png"), graphics.Image(self.position, "Chess_Images/WB_Knight.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/WW_Knight.png"), graphics.Image(self.position, "Chess_Images/WB_Knight.png"), graphics.Image(self.position, "Chess_Images/WG_Knight.png")] 
         else:
-            self.images = [graphics.Image(self.position, "Chess_Images/BW_Knight.png"), graphics.Image(self.position, "Chess_Images/BB_Knight.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/BW_Knight.png"), graphics.Image(self.position, "Chess_Images/BB_Knight.png"), graphics.Image(self.position, "Chess_Images/BG_Knight.png")] 
     
     def possibleMoves(self):
         self.moves = {}
@@ -118,9 +124,9 @@ class Pawn(Piece):
         
     def setImages(self):
         if self.color == "white":
-            self.images = [graphics.Image(self.position, "Chess_Images/WW_Pawn.png"), graphics.Image(self.position, "Chess_Images/WB_Pawn.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/WW_Pawn.png"), graphics.Image(self.position, "Chess_Images/WB_Pawn.png"), graphics.Image(self.position, "Chess_Images/WG_Pawn.png")] 
         else:
-            self.images = [graphics.Image(self.position, "Chess_Images/BW_Pawn.png"), graphics.Image(self.position, "Chess_Images/BB_Pawn.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/BW_Pawn.png"), graphics.Image(self.position, "Chess_Images/BB_Pawn.png"), graphics.Image(self.position, "Chess_Images/BG_Pawn.png")] 
      
     def possibleMoves(self):
         self.moves = {}
@@ -142,9 +148,9 @@ class Queen(Piece):
         
     def setImages(self):
         if self.color == "white":
-            self.images = [graphics.Image(self.position, "Chess_Images/WW_Queen.png"), graphics.Image(self.position, "Chess_Images/WB_Queen.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/WW_Queen.png"), graphics.Image(self.position, "Chess_Images/WB_Queen.png"), graphics.Image(self.position, "Chess_Images/WG_Queen.png")] 
         else:
-            self.images = [graphics.Image(self.position, "Chess_Images/BW_Queen.png"), graphics.Image(self.position, "Chess_Images/BB_Queen.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/BW_Queen.png"), graphics.Image(self.position, "Chess_Images/BB_Queen.png"), graphics.Image(self.position, "Chess_Images/BG_Queen.png")] 
     
     def possibleMoves(self):
         self.moves = {}
@@ -191,9 +197,9 @@ class Rook(Piece):
         
     def setImages(self):
         if self.color == "white":
-            self.images = [graphics.Image(self.position, "Chess_Images/WW_Rook.png"), graphics.Image(self.position, "Chess_Images/WB_Rook.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/WW_Rook.png"), graphics.Image(self.position, "Chess_Images/WB_Rook.png"), graphics.Image(self.position, "Chess_Images/WG_Rook.png")] 
         else:
-            self.images = [graphics.Image(self.position, "Chess_Images/BW_Rook.png"), graphics.Image(self.position, "Chess_Images/BB_Rook.png")] 
+            self.images = [graphics.Image(self.position, "Chess_Images/BW_Rook.png"), graphics.Image(self.position, "Chess_Images/BB_Rook.png"), graphics.Image(self.position, "Chess_Images/BG_Rook.png")] 
             
     def possibleMoves(self):
         self.moves = {}

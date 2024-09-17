@@ -7,7 +7,6 @@ class Board:
         for row in self.pieceDict:
             for column in range(8):
                 self.pieceDict[row].append(Piece(graphics.Point(row, column)))
-        self.image = graphics.Image(graphics.Point(3.5, 3.5), "Chess_Images/Chess_Board.png")
     
     def setBoard(self):
         # Pawns
@@ -54,16 +53,12 @@ class Board:
     def imageBoard(self):
         self.win = graphics.GraphWin("Chess Board", 360, 360)
         self.win.setCoords(-6, -6, 12, 12)
-        self.image.draw(self.win)
         for row in self.pieceDict:
             for column in range(8):
-                if self.pieceDict[row][column].color != None:
-                    if (row + column) % 2 == 1:
-                        self.pieceDict[row][column].images[0].draw(self.win)
-                    else:
-                        self.pieceDict[row][column].images[1].draw(self.win)
-        self.win.getMouse()
-        self.win.close()
+                if (row + column) % 2 == 1:
+                    self.pieceDict[row][column].images[0].draw(self.win)
+                else:
+                    self.pieceDict[row][column].images[1].draw(self.win)
         
     def fixPossibleMoves(self):
         for row in range(0, 8):
