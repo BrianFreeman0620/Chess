@@ -11,17 +11,14 @@ chessBoard.fixPossibleMoves()
 while not gameEnd:
     currentClick = chessBoard.win.getMouse()
     clickPosition = graphics.Point(round(currentClick.getX()), round(currentClick.getY()))
-    clickedPiece = chessBoard.pieceDict[int(clickPosition.getX())][int(clickPosition.getY())]
-    if lastClicked != None:
-        lastClicked.images[2].undraw()
-        if (int(lastClicked.position.getX()) + int(lastClicked.position.getY())) % 2 == 1:
-            lastClicked.images[0].draw(chessBoard.win)
-        else:
-            lastClicked.images[1].draw(chessBoard.win)
-    if (int(clickPosition.getX()) + int(clickPosition.getY())) % 2 == 1:
-        clickedPiece.images[0].undraw()
-    else:
-        clickedPiece.images[1].undraw()
-    clickedPiece.images[2].draw(chessBoard.win)
-    lastClicked = clickedPiece
+    if lastClicked != None and not (clickPosition.getX() == lastClicked.position.getX() and clickPosition.getY() == lastClicked.position.getY()):
+        legalMove = False
+        for possibleMove in range(len(lastClicked.moves)):
+            currentMove = lastClicked.moves[possibleMove][0]
+            if currentMove.getX() == clickPosition.getX() and currentMove.getY() == clickPosition.getY():
+                legalMove = True
+        if legalMove:
+            chessBoard.movePiece(chessBoard.pieceDict[int(lastClicked.position.getX())][int(lastClicked.position.getY())], clickPosition)
+    lastClicked = chessBoard.selectPiece(clickPosition, lastClicked)
+    chessBoard.fixPossibleMoves()
 chessBoard.win.close()

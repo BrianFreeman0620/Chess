@@ -18,6 +18,9 @@ class Piece:
         self.color = color
         
     def changePosition(self, newPosition):
+        self.images[0].move(newPosition.getX() - self.position.getX(), newPosition.getY() - self.position.getY())
+        self.images[1].move(newPosition.getX() - self.position.getX(), newPosition.getY() - self.position.getY())
+        self.images[2].move(newPosition.getX() - self.position.getX(), newPosition.getY() - self.position.getY())
         self.position = newPosition
         
     def possibleMoves(self):
@@ -130,13 +133,23 @@ class Pawn(Piece):
      
     def possibleMoves(self):
         self.moves = {}
+        moveCount = 0
         if self.color == "white":
             sideMult = 1
         else:
             sideMult = -1
-        self.moves[0] = [graphics.Point(self.position.getX(), self.position.getY() + sideMult), "move", 1]
+        self.moves[moveCount] = [graphics.Point(self.position.getX(), self.position.getY() + sideMult), "move", 1]
+        moveCount += 1
         if not self.moved:
-            self.moves[1] = [graphics.Point(self.position.getX(), self.position.getY() + 2 * sideMult), "move", 2]
+            self.moves[moveCount] = [graphics.Point(self.position.getX(), self.position.getY() + 2 * sideMult), "move", 2]
+            moveCount += 1
+        if self.position.getX() + sideMult > -1 and self.position.getX() + sideMult < 8:
+            self.moves[moveCount] = [graphics.Point(self.position.getX() + sideMult, self.position.getY() + sideMult), "capture right", 1]
+            moveCount += 1
+        if self.position.getX() - sideMult > -1 and self.position.getX() - sideMult < 8:
+            self.moves[moveCount] = [graphics.Point(self.position.getX() - sideMult, self.position.getY() + sideMult), "capture left", 1]
+            moveCount += 1
+        
 
 class Queen(Piece):
     def __init__(self, startingPos):
